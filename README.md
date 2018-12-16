@@ -17,7 +17,7 @@ I use a second volume to persist the database
 version: '2'
 services:
         nginx:
-                image: akkro/nginx:latest
+                image: gerault/docker-nginx:latest
                 container_name: mytinytodo_nginx_prod
                 restart: always
                 ports:
@@ -45,7 +45,7 @@ services:
                 volumes:
                         - mysqldata:/var/lib/mysql
                 environment:
-                        - MYSQL_ROOT_PASSWORD=root
+                        - MYSQL_ROOT_PASSWORD=rootpwd
                         - MYSQL_DATABASE=mytinytodo
                         - MYSQL_USER=mytinytodouser
                         - MYSQL_PASSWORD=mytinytodopwd
@@ -55,13 +55,14 @@ services:
 volumes:
         myphpdata:
         mysqldata:
+
 ```
 
 Here is the content of the nginx conf file (**conf_files/site.conf**)
 ```
 server {
     listen 80;
-    server_name todo.akkro-libre.org;
+    server_name your_server_name;
 
     index index.php index.html;
     root /var/www/html/mytinytodo;
